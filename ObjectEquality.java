@@ -1,23 +1,14 @@
 public class ObjectEquality {
-    private String name;
-    private int age;
-    
-    public ObjectEquality(String name, int age) {
-        this.name = name;
-        this.age = age;
+    String name; int age;
+    ObjectEquality(String name, int age) { this.name = name; this.age = age; }
+
+    boolean equals(ObjectEquality o) {
+        return o != null && name.equals(o.name) && age == o.age;
     }
-    
-    public boolean equals(ObjectEquality obj) {
-        return this == obj || (obj != null && getClass() == obj.getClass() && 
-               name.equals(obj.name) && age == obj.age);
-    }
-    
+
     public static void main(String[] args) {
-        ObjectEquality obj1 = new ObjectEquality("John", 25);
-        ObjectEquality obj2 = new ObjectEquality("John", 25);
-        ObjectEquality obj3 = new ObjectEquality("Jane", 30);
-        
-        System.out.println("obj1 equals obj2: " + obj1.equals(obj2));
-        System.out.println("obj1 equals obj3: " + obj1.equals(obj3));
+        ObjectEquality a = new ObjectEquality("John", 25);
+        ObjectEquality b = new ObjectEquality("Joh", 25);
+        System.out.println("Equal: " + a.equals(b));
     }
-} 
+}
