@@ -1,9 +1,18 @@
+import java.util.HashSet;
+import java.util.Set;
+
 public class RemoveDuplicates {
     public static void main(String[] args) {
-        int[] arr = {20, 20, 30, 40, 50, 50, 50};
-        int j = 0;
-        for(int i = 1; i < arr.length; i++)
-            if(arr[i] != arr[j]) arr[++j] = arr[i];
-        System.out.println("New length of array after removing duplicates: " + (j + 1));
+        int[] arr = {1, 2, 3, 2, 4, 5, 3, 1};
+
+        Set<Integer> unique = new HashSet<>();
+        for (int num : arr) {
+            unique.add(num);
+        }
+
+        System.out.print("Array without duplicates: ");
+        for (int num : unique) {
+            System.out.print(num + " ");
+        }
     }
-} 
+}
