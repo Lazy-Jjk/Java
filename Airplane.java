@@ -1,29 +1,29 @@
 public class Airplane {
-    private String flightNumber, destination, departureTime;
-    private boolean isDelayed;
-    
+    String flightNumber;
+    String destination;
+    String departureTime;
+
     public Airplane(String flightNumber, String destination, String departureTime) {
         this.flightNumber = flightNumber;
         this.destination = destination;
         this.departureTime = departureTime;
-        this.isDelayed = false;
     }
-    
-    public void delayFlight(int minutes) {
-        isDelayed = true;
-        System.out.println("Flight " + flightNumber + " delayed by " + minutes + " minutes");
-    }
-    
+
     public void checkStatus() {
-        System.out.println("Flight Status:\nFlight Number: " + flightNumber + 
-                          "\nDestination: " + destination + "\nDeparture Time: " + departureTime + 
-                          "\nStatus: " + (isDelayed ? "Delayed" : "On Time"));
+        System.out.println("Flight " + flightNumber + " to " + destination + " departs at " + departureTime);
     }
-    
+
+    public void delayFlight(String newTime) {
+        departureTime = newTime;
+        System.out.println("Flight delayed. New departure time: " + departureTime);
+    }
+
+    // Main method here
     public static void main(String[] args) {
-        Airplane flight = new Airplane("AA123", "New York", "10:00 AM");
-        flight.checkStatus();
-        flight.delayFlight(30);
-        flight.checkStatus();
+        Airplane plane = new Airplane("AI203", "New York", "10:30 AM");
+
+        plane.checkStatus();             // Original status
+        plane.delayFlight("12:00 PM");   // Delay flight
+        plane.checkStatus();             // Updated status
     }
-} 
+}
