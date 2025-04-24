@@ -1,33 +1,32 @@
-class DuplicateNumberException extends Exception {
-    public DuplicateNumberException(String message) {
+import java.util.*;
+
+class Duplicate extends Exception {
+    public Duplicate(String message) {
         super(message);
     }
 }
 
-public class DuplicateNumberDemo {
-    public static void checkDuplicates(int[] numbers) throws DuplicateNumberException {
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = i + 1; j < numbers.length; j++) {
-                if (numbers[i] == numbers[j]) {
-                    throw new DuplicateNumberException("Duplicate number found: " + numbers[i]);
+public class DuplicateCheck {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Set<Integer> numbers = new HashSet<>();
+
+        System.out.println("Enter integers (type -1 to stop):");
+
+        while (true) {
+            int num = sc.nextInt();
+            if (num == -1) break;
+
+            try {
+                if (!numbers.add(num)) {
+                    throw new Duplicate("Duplicate number found: " + num);
                 }
+            } catch (Duplicate e) {
+                System.out.println("Exception: " + e.getMessage());
             }
         }
-        System.out.println("No duplicate numbers found.");
+
+        sc.close();
+        System.out.println("No more input. Program ended.");
     }
-    
-    public static void main(String[] args) {
-        try {
-            int[] numbers1 = {1, 2, 3, 4, 5};
-            int[] numbers2 = {1, 2, 2, 3, 4};
-            
-            System.out.println("Checking first array:");
-            checkDuplicates(numbers1);
-            
-            System.out.println("\nChecking second array:");
-            checkDuplicates(numbers2);
-        } catch (DuplicateNumberException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-} 
+}
