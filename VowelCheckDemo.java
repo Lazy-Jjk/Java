@@ -1,31 +1,29 @@
-class NoVowelsException extends Exception {
-    public NoVowelsException(String message) {
+import java.util.Scanner;
+
+class NoVowels extends Exception {
+    public NoVowels(String message) {
         super(message);
     }
 }
 
-public class VowelCheckDemo {
-    public static void checkVowels(String str) throws NoVowelsException {
-        boolean hasVowel = false;
-        for (char c : str.toLowerCase().toCharArray()) {
-            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
-                hasVowel = true;
-                break;
-            }
+public class VowelCheck {
+    static void checkVowels(String str) throws NoVowels {
+        if (!str.toLowerCase().matches(".*[aeiou].*")) {
+            throw new NoVowels("No vowels found in the string.");
+        } else {
+            System.out.println("String contains vowels.");
         }
-        
-        if (!hasVowel) {
-            throw new NoVowelsException("The string '" + str + "' does not contain any vowels!");
-        }
-        System.out.println("The string '" + str + "' contains vowels.");
     }
-    
+
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+
         try {
-            checkVowels("Hello");
-            checkVowels("xyz");
-        } catch (NoVowelsException e) {
-            System.out.println("Error: " + e.getMessage());
+            checkVowels(input);
+        } catch (NoVowels e) {
+            System.out.println("Exception: " + e.getMessage());
         }
     }
-} 
+}
