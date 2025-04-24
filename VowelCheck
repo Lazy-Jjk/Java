@@ -1,0 +1,19 @@
+class NoVowels extends Exception {
+    public NoVowels(String msg) { super(msg); }
+}
+
+public class VowelCheckDemo{
+    static void checkVowels(String str) throws NoVowels {
+        if (!str.matches(".*[aeiouAEIOU].*"))
+            throw new NoVowels("No vowels found!");
+        System.out.println("Vowels present.");
+    }
+
+    public static void main(String[] args) {
+        try {
+            checkVowels("sky"); // Try changing to "hello"
+        } catch (NoVowels e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
